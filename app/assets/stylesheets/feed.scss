@@ -1,3 +1,53 @@
 // Place all the styles related to the Feed controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.color{
+    color: #66ccff;
+}
+
+// Navigation Menu
+ul{
+    padding: none !important;
+    padding: 0;
+    list-style-type: none;
+}
+
+ul > li {
+    font-size: 18px;
+    color: white;
+    background-color: #66ccff;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.nav-image{
+    width: 30px;
+    height: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+// Section Page
+
+.page-borders{
+    border-right: solid silver 0.5px;
+    border-left: solid silver 0.5px;
+    height: 100vh;
+}
+
+h1{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-size: 30px !important;
+    text-align: center;
+}
+
+.header{
+    border-bottom: solid silver 0.5px;
+}
