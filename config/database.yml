@@ -8,7 +8,7 @@ default: &default
 
 development:
   <<: *default
-  database: twitter
+  database: twitter_dev
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -72,6 +72,6 @@ test:
 #
 production:
   <<: *default
-  database: myapp_production
-  username: myapp
+  database: twitter_production
+  username: password
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
