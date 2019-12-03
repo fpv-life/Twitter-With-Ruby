@@ -2,13 +2,11 @@
     <div class='col-md-3'>
         <%= image_tag("/assets/logo.jpg",  alt: "Logo", class: "nav-image") %>
         <ul>
-            <%= link_to('Home', edit_user_registration_path, class: 'nav-link') %>
-
-            <li class="active" onclick="location.href='index.php'">Home</li>
+            <%= link_to('Home', root_path, class: 'nav-link') %>
             <li onclick="location.href='followers-list.php'">Lists</li>
             <li onclick="location.href='profile.php'">Profile</li>
             <li onclick=location.href='admin-page.php'>Admin page</li>
-            <li onclick="location.href='user.php'">Login</li>
+            <%= check_login %>
         </ul>
     </div>
 

@@ -13,15 +13,6 @@ ul{
     list-style-type: none;
 }
 
-ul > li {
-    font-size: 18px;
-    color: white;
-    background-color: #66ccff;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 20px;
-}
-
 .nav-image{
     width: 30px;
     height: 30px;
@@ -30,6 +21,15 @@ ul > li {
     margin-right: auto;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.nav-link{
+    font-size: 18px;
+    color: white;
+    background-color: #66ccff;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 20px;
 }
 
 // Section Page
