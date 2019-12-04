@@ -226,7 +226,6 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.5)
   jquery-rails
-  omniauth
   omniauth-facebook
   pg
   puma (~> 3.7)
