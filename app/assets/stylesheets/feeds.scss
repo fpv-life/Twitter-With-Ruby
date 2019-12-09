@@ -1,4 +1,4 @@
-// Place all the styles related to the Feed controller here.
+// Place all the styles related to the feeds controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
@@ -31,6 +31,10 @@ ul{
     padding: 10px;
     border-radius: 20px;
 }
+.header{
+    border-bottom: solid silver 0.5px;
+    margin-bottom: 10px;
+}
 
 // Section Page
 
@@ -46,4 +50,16 @@ h1{
     width: 100%;
     font-size: 30px !important;
     text-align: center;
+}
+
+.feed{
+    border: 0.5px silver solid !important;
+    background-color: white !important;
+    border-radius: 20px;
+    height: 300px;
+}
+
+.tweet-image{
+    float: right;
+
 }

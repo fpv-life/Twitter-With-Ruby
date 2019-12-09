@@ -1,0 +1,23 @@
+
+<p>
+  <strong>Text:</strong>
+  <%= @feed.text %>
+</p>
+
+<p>
+  <strong>Picture:</strong>
+  <%= @feed.picture %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @feed.time %>
+</p>
+
+<p>
+  <strong>Reported:</strong>
+  <%= @feed.reported %>
+</p>
+
+<%= link_to 'Edit', edit_feed_path(@feed) %> |
+<%= link_to 'Back', feeds_path %>

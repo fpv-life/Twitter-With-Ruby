@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  text: MyText
+  picture: MyString
+  time: 2019-12-08 16:29:09
+  reported: MyString
+
+two:
+  text: MyText
+  picture: MyString
+  time: 2019-12-08 16:29:09
+  reported: MyString

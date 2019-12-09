@@ -15,7 +15,8 @@ gem 'pg' #Ading PostGre
 gem 'bootstrap', '~> 4.3.1' #Adding Bootstrap
 gem 'devise' #Adding device
 gem 'jquery-rails' #Addin JQuery
-gem 'omniauth-facebook' #Adding Facebook gems
+gem 'omniauth-facebook' #Adding Facebook gem
+gem 'omniauth-google-oauth2' #Adding Google gem
 
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
