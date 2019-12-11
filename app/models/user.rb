@@ -9,6 +9,7 @@ class User < ApplicationRecord
   devise :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :feeds, dependent: :destroy
+  acts_as_commontator
 
   def self.new_with_session(params, session)
     super.tap do |user|

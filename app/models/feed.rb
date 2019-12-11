@@ -1,3 +1,5 @@
 class Feed < ApplicationRecord
     belongs_to :user
+    acts_as_commontable dependent: :destroy
+
 end

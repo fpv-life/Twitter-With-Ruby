@@ -17,6 +17,9 @@ gem 'devise' #Adding device
 gem 'jquery-rails' #Addin JQuery
 gem 'omniauth-facebook' #Adding Facebook gem
 gem 'omniauth-google-oauth2' #Adding Google gem
+gem 'commontator' #Adding comments
+gem 'jquery-rails' #Same
+gem 'sassc-rails' #Same
 
 # Use Puma as the app server
 gem 'puma', '~> 3.7'

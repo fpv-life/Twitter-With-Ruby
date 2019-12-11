@@ -12,14 +12,16 @@
 
         <% @feeds.each do |feed| %>
         <div class='container feed'>
-        
           <div class='tweet-image'>
-            <%= feed.picture %>
+            <%= image_tag("/assets/" +  feed.user.avatar + ".png",  alt: "Logo", class: "avatar-image") %>
           </div>
           <div class='tweet-time'>
             <%= feed.time %>
           </div>
-          <tr>
+          <div class='tweet-username'>
+            <%= feed.user.username %>
+          </div><br>
+          <tr><br>
             <td><%= feed.text %></td>
             <td><%= feed.picture %></td>
             <td><%= feed.time %></td>
@@ -28,10 +30,12 @@
             <td><%= link_to 'Show', feed %></td>
             <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
             <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            
           </tr>
-        
+          
 
         </div>
+        <%= commontator_thread(feed) %>
         <% end %>
     </div>
     
