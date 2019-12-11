@@ -8,6 +8,8 @@ class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: [:google_oauth2]
   devise :omniauthable, :omniauth_providers => [:facebook]
 
+  has_many :feeds, dependent: :destroy
+
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]

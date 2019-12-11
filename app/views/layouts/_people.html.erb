@@ -1,0 +1,9 @@
+<h1>Who to follow</h1>
+<% @users = User.all %>
+<% @users.each do |user| %>
+    <div class="container user-profiles">
+        <%= image_tag("/assets/" +  user.avatar + ".png",  alt: "Logo", class: "people-image") %>
+        <%= user.username %><br/>
+        <%= user.email %><br/>
+    </div>
+<% end %>

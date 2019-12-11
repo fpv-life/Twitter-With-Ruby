@@ -1,5 +1,4 @@
-<%= link_to 'New Feed', new_feed_path %>
-
+<%= link_to("new", new_feed_path) %>
 <div class='row'>
     <div class='col-md-3'>
       <%= render 'layouts/menu' %>  
@@ -11,8 +10,9 @@
            <h1>Home</h1>
         </div>
 
-        <div class='container feed'>
         <% @feeds.each do |feed| %>
+        <div class='container feed'>
+        
           <div class='tweet-image'>
             <%= feed.picture %>
           </div>
@@ -23,18 +23,19 @@
             <td><%= feed.text %></td>
             <td><%= feed.picture %></td>
             <td><%= feed.time %></td>
+            <td><%= feed.user.username %> </td>
             <td><%= feed.reported %></td>
             <td><%= link_to 'Show', feed %></td>
             <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
             <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
-        <% end %>
+        
 
         </div>
-
+        <% end %>
     </div>
-
-    <div class='col-md-3 color'>
-        <h1>Who to follow</h1>
+    
+    <div class='col-md-3 color margin'>
+      <%= render 'layouts/people' %>  
     </div>
 </div>
