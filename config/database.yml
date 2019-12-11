@@ -75,3 +75,4 @@ production:
   database: twitter_production
   username: password
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
