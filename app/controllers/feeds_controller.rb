@@ -1,10 +1,24 @@
 class FeedsController < ApplicationController
   before_action :set_feed, only: [:show, :edit, :update, :destroy]
 
+  def upvote
+    @feed = Feed.find(params[:id])
+    @feed.liked_by current_user
+    redirect_to @feed
+  end
+  
+  def downvote
+    @feed = Feed.find(params[:id])
+    @feed.downvote_from current_user
+    redirect_to @feed
+  end
+
   # GET /feeds
   # GET /feeds.json
   def index
     @feeds = Feed.all
+    @user = current_user
+    @feed = Feed.new
   end
 
   # GET /feeds/1

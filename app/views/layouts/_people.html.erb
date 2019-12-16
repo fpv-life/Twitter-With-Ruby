@@ -1,8 +1,19 @@
 <h1>Who to follow</h1>
 <% @users = User.all %>
 <% @users.each do |user| %>
+    <% unless user == current_user %>
     <div class="container user-profiles text-center">
         <%= image_tag("/assets/" +  user.avatar + ".png",  alt: "Logo", class: "people-image") %><br>
         <%= user.username %><br/>
+        <% if user_signed_in? %>
+            <% unless user == current_user %>
+                <% if current_user.following?(user) %>
+                    <%= button_to("Un-Follow", user_follow_path(user.to_param, current_user.get_follow(user).id), :method => :delete, :remote => true, class: 'btn btn-primary') %>
+                <% else %>
+                    <%= button_to("Follow", user_follows_path(user.to_param), :remote => true, class: 'btn btn-primary') %>
+                <% end %>
+            <% end %>
+        <% end %>
     </div>
+    <% end %>
 <% end %>

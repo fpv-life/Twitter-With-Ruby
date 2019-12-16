@@ -10,6 +10,9 @@ class User < ApplicationRecord
 
   has_many :feeds, dependent: :destroy
   acts_as_commontator
+  acts_as_followable
+  acts_as_follower
+  acts_as_voter
 
   def self.new_with_session(params, session)
     super.tap do |user|
@@ -24,7 +27,7 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.username = auth.info.name   # assuming the user model has a name
-      user.avatar = auth.info.image # assuming the user model has an image
+      user.avatar = auth.info.image_url # assuming the user model has an image
     end
   end
 
@@ -34,9 +37,11 @@ class User < ApplicationRecord
 
     # Uncomment the section below if you want users to be created if they don't exist
     unless user
-      user = User.create(name: data['name'],
+      user = User.create(username: data['name'],
       email: data['email'],
-      password: Devise.friendly_token[0,20]
+      password: Devise.friendly_token[0,20],
+      avatar: data['image'],
+      provider: 'facebook'
     )
     end
     user

@@ -1,0 +1,55 @@
+// Place all the styles related to the lists controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.selection{
+    background-color: #66ccff;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    transition: 0.5s;
+    border-bottom: 0.5px solid #66ccff;
+    border-top: 0.5px solid #66ccff;
+}
+.body-margin{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.selection:hover{
+    background-color: white;
+    color: #66ccff;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.people-lists{
+    border-bottom: 0.5px solid #66ccff;
+    color: #66ccff;
+    padding: 10px;
+    width: 100%;
+    margin: 0;
+}
+.people-lists>form{
+    width: 20%;
+    float: right;
+    margin-top: 6px;
+}
+.people-lists>img{
+    margin: 0;
+}
+
+.active{
+    background-color: white;
+    color: #66ccff;
+}
+.list-following{
+    display: block;
+}
+.list-followers{
+    display: none;
+}
+.list-likes{
+    display: none;
+}

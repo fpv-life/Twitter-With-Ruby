@@ -38,7 +38,6 @@ ul{
     transition: 0.5s;
 }
 .header{
-    border-bottom: solid silver 0.5px;
     margin-bottom: 10px;
 }
 
@@ -49,6 +48,9 @@ ul{
     border-right: solid silver 0.5px;
     border-left: solid silver 0.5px;
     height: 100vh;
+}
+.no-padding{
+    padding: 0 !important;
 }
 
 h1{
@@ -79,7 +81,6 @@ h1{
     height: 60px;
     border-radius: 60px;
 }
-.tweet-user{}
 
 
 // People 
@@ -89,7 +90,7 @@ h1{
     padding: 20px;
     border-radius: 20px;
     color: white;
-    
+    margin-bottom: 20px;
 }
 
 .margin{

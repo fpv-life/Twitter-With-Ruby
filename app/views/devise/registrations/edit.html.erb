@@ -6,10 +6,9 @@
 
     <div class='col-md-6 page-borders'>
         <div class='col-md-2 header color'>
-           <h1>Home</h1>
+           <h1>Profile</h1>
         </div>
         <hr class='line'>
-        <h2>Edit <%= resource_name.to_s.humanize %></h2>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -54,7 +53,7 @@
     </div>
 
     <div class='col-md-3 color'>
-        <h1>Who to follow</h1>
+      <%= render 'layouts/people' %>  
     </div>
 </div>
 

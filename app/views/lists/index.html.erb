@@ -1,0 +1,70 @@
+<div class='row'>
+    <div class='col-md-3'>
+      <%= render 'layouts/menu' %>  
+    </div>
+
+
+    <div class='col-md-6 page-borders no-padding'>
+        <div class='container header color'>
+           <h1>Lists</h1>
+        </div>
+        <div class='row body-margin'>
+          <div class='col-md selection active' onclick="Followers('following')">
+            Following
+          </div>
+          <div class='col-md selection' onclick="Followers('followers')">
+            Followers
+          </div>
+          <div class='col-md selection' onclick="Followers('likes')">
+            Likes
+          </div>
+        </div>
+
+
+        <div class="list-following">
+          <% @users = current_user.all_following %>
+          <% @users.each do |user| %>
+              <% unless user == current_user %>
+              <div class="people-lists">
+                  <%= image_tag("/assets/" +  user.avatar + ".png",  alt: "Logo", class: "people-image") %>
+                  <%= user.username %>
+                  <% if user_signed_in? %>
+                      <% unless user == current_user %>
+                          <% if current_user.following?(user) %>
+                              <%= button_to("Un-Follow", user_follow_path(user.to_param, current_user.get_follow(user).id), :method => :delete, :remote => true, class: 'btn btn-primary button') %>
+                          <% else %>
+                              <%= button_to("Follow", user_follows_path(user.to_param), :remote => true, class: 'btn btn-primary button') %>
+                          <% end %>
+                      <% end %>
+                  <% end %>
+              </div>
+              <% end %>
+          <% end %>
+        </div>
+
+        <div class="list-followers">
+          <% @users = current_user.followers %>
+          <% @users.each do |user| %>
+              <% unless user == current_user %>
+              <div class="people-lists">
+                  <%= image_tag("/assets/" +  user.avatar + ".png",  alt: "Logo", class: "people-image") %>
+                  <%= user.username %>
+                  <% if user_signed_in? %>
+                      <% unless user == current_user %>
+                          <% if current_user.following?(user) %>
+                              <%= button_to("Un-Follow", user_follow_path(user.to_param, current_user.get_follow(user).id), :method => :delete, :remote => true, class: 'btn btn-primary button') %>
+                          <% else %>
+                              <%= button_to("Follow", user_follows_path(user.to_param), :remote => true, class: 'btn btn-primary button') %>
+                          <% end %>
+                      <% end %>
+                  <% end %>
+              </div>
+              <% end %>
+          <% end %>
+        </div>
+    </div>
+    
+    <div class='col-md-3 color margin'>
+      <%= render 'layouts/people' %>  
+    </div>
+</div>
