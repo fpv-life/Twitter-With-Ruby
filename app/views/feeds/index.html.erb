@@ -16,7 +16,7 @@
         <% @feeds.each do |feed| %>
         <div class='container feed'>
           <div class='tweet-image'>
-            <%= image_tag 'http://graph.facebook.com/v2.10/2654394201274246/picture' %>
+            <%= image_tag(feed.user.avatar, class:"avatar-image") %>
           </div>
           <div class='tweet-time'>
             <%= feed.time %>
@@ -24,21 +24,26 @@
           <div class='tweet-username'>
             <%= feed.user.username %>
           </div>
-          <%= link_to "Upvote", like_feed_path(feed.id), method: :put %>
-          <%= link_to "Downvote", dislike_feed_path(feed.id), method: :put %>
+          <div class='tweet-text'>
+            <%= feed.text %>
+          </div>
           
-          <br>
-          <tr><br>
-            <td><%= feed.text %></td>
-            <td><%= feed.picture %></td>
-            <td><%= feed.time %></td>
-            <td><%= feed.user.username %> </td>
-            <td><%= feed.reported %></td>
-            <td><%= link_to 'Show', feed %></td>
-            <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
-            <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            
-          </tr>
+          
+          <% if !(feed.picture.nil? || feed.picture.empty?) %>
+            <%= image_tag(feed.picture, class:"avatar-image") %>
+          <% end %>
+
+          <% if current_user.voted_up_for? feed %>
+            <%= link_to "Downvote", dislike_feed_path(feed.id), method: :put, class: "links" %>
+          <% else %>
+            <%= link_to "Upvote", like_feed_path(feed.id), method: :put, class: "links" %>
+          <% end %>
+          
+          <div class="buttons">
+            <%= link_to 'Show', feed %>
+            <%= link_to 'Edit', edit_feed_path(feed) %>
+            <%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
           
 
         </div>
