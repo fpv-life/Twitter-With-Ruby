@@ -33,17 +33,19 @@
             <%= image_tag(feed.picture, class:"avatar-image") %>
           <% end %>
 
-          <% if current_user.voted_up_for? feed %>
-            <%= link_to "Downvote", dislike_feed_path(feed.id), method: :put, class: "links" %>
-          <% else %>
-            <%= link_to "Upvote", like_feed_path(feed.id), method: :put, class: "links" %>
+          <% if current_user.email === feed.user.email %>
+            <% if current_user.voted_up_for? feed %>
+              <%= link_to "Downvote", dislike_feed_path(feed.id), method: :put, class: "links" %>
+            <% else %>
+              <%= link_to "Upvote", like_feed_path(feed.id), method: :put, class: "links" %>
+            <% end %>
+            
+            <div class="buttons">
+              <%= link_to 'Show', feed %>
+              <%= link_to 'Edit', edit_feed_path(feed) %>
+              <%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
           <% end %>
-          
-          <div class="buttons">
-            <%= link_to 'Show', feed %>
-            <%= link_to 'Edit', edit_feed_path(feed) %>
-            <%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %>
-          </div>
           
 
         </div>

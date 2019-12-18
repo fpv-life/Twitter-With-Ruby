@@ -3,7 +3,7 @@
 <% @users.each do |user| %>
     <% unless user == current_user %>
     <div class="container user-profiles text-center">
-        <%= image_tag("/assets/" +  user.avatar + ".png",  alt: "Logo", class: "people-image") %><br>
+        <%= image_tag(user.avatar,  alt: "/assets/" +  user.avatar + ".png", class: "people-image") %><br>
         <%= user.username %><br/>
         <% if user_signed_in? %>
             <% unless user == current_user %>

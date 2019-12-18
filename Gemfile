@@ -21,6 +21,10 @@ gem 'commontator' #Adding comments
 gem 'sassc-rails' #Same
 gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master' #Following
 gem 'acts_as_votable' #Voting on posts
+gem 'activeadmin' #Admin page
+gem 'cancancan'
+gem 'draper'
+gem 'pundit'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.7'

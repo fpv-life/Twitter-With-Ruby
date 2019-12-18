@@ -1,3 +1,9 @@
+if (window.location.hash === "#_=_"){
+  history.replaceState 
+      ? history.replaceState(null, null, window.location.href.split("#")[0])
+      : window.location.hash = "";
+}
+
 setTimeout(fade_out, 2000);
 
 function fade_out() {
@@ -17,7 +23,7 @@ var Followers = function(check){
 
       people.style.display = "none";
       strangers.style.display = "block";
-      //likes.style.display = "none";
+      likes.style.display = "none";
   }else if(check === 'following'){
       active[1].classList.remove("active");
       active[0].classList.add("active");
@@ -25,7 +31,7 @@ var Followers = function(check){
 
       people.style.display = "block";
       strangers.style.display = "none";
-      //likes.style.display = "none";
+      likes.style.display = "none";
   }else{
       active[1].classList.remove("active");
       active[0].classList.remove("active");
@@ -33,6 +39,6 @@ var Followers = function(check){
     
       people.style.display = "none";
       strangers.style.display = "none";
-      //likes.style.display = "block";
+      likes.style.display = "block";
   }
 }

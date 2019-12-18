@@ -26,7 +26,7 @@
           <% @users.each do |user| %>
               <% unless user == current_user %>
               <div class="people-lists">
-                  <%= image_tag("/assets/" +  user.avatar + ".png",  alt: "Logo", class: "people-image") %>
+                  <%= image_tag(user.avatar,  alt: "/assets/" +  user.avatar + ".png", class: "people-image") %>
                   <%= user.username %>
                   <% if user_signed_in? %>
                       <% unless user == current_user %>
@@ -47,6 +47,27 @@
           <% @users.each do |user| %>
               <% unless user == current_user %>
               <div class="people-lists">
+                  <%= image_tag(user.avatar,  alt: "/assets/" +  user.avatar + ".png", class: "people-image") %>
+                  <%= user.username %>
+                  <% if user_signed_in? %>
+                      <% unless user == current_user %>
+                          <% if current_user.following?(user) %>
+                              <%= button_to("Un-Follow", user_follow_path(user.to_param, current_user.get_follow(user).id), :method => :delete, :remote => true, class: 'btn btn-primary button') %>
+                          <% else %>
+                              <%= button_to("Follow", user_follows_path(user.to_param), :remote => true, class: 'btn btn-primary button') %>
+                          <% end %>
+                      <% end %>
+                  <% end %>
+              </div>
+              <% end %>
+          <% end %>
+        </div>
+
+        <div class="list-followers">
+          <% @user = current_user.followers %>
+          <% @users.each do |user| %>
+              <% unless user == current_user %>
+              <div class="people-lists">
                   <%= image_tag("/assets/" +  user.avatar + ".png",  alt: "Logo", class: "people-image") %>
                   <%= user.username %>
                   <% if user_signed_in? %>
@@ -62,6 +83,47 @@
               <% end %>
           <% end %>
         </div>
+
+        <% @feeds.each do |feed| %>
+          <div class='container feed list-likes'>
+            <div class='tweet-image'>
+              <%= image_tag(feed.user.avatar, class:"avatar-image") %>
+            </div>
+            <div class='tweet-time'>
+              <%= feed.time %>
+            </div>
+            <div class='tweet-username'>
+              <%= feed.user.username %>
+            </div>
+            <div class='tweet-text'>
+              <%= feed.text %>
+            </div>
+            
+            
+            <% if !(feed.picture.nil? || feed.picture.empty?) %>
+              <%= image_tag(feed.picture, class:"avatar-image") %>
+            <% end %>
+            
+            <% if current_user.email === feed.user.email %>
+              <% if current_user %>
+                <% if current_user.voted_up_for? feed %>
+                  <%= link_to "Downvote", dislike_feed_path(feed.id), method: :put, class: "links" %>
+                <% else %>
+                  <%= link_to "Upvote", like_feed_path(feed.id), method: :put, class: "links" %>
+                <% end %>
+                
+                <div class="buttons">
+                  <%= link_to 'Show', feed %>
+                  <%= link_to 'Edit', edit_feed_path(feed) %>
+                  <%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="list-likes">
+            <%= commontator_thread(feed) %>
+          </div>
+        <% end %>
     </div>
     
     <div class='col-md-3 color margin'>
