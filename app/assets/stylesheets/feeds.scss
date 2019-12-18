@@ -61,18 +61,16 @@ h1{
     text-align: center;
 }
 
-
 .feed{
     border: 0.5px silver solid !important;
     background-color: white !important;
     border-radius: 20px;
     height: 300px;
-    position: relative;
 }
+
+
 .tweet-time{
     float: right;
-    margin-right: 10px;
-    margin-top: 10px;
 }
 .tweet-image{
     float: left;
@@ -82,32 +80,6 @@ h1{
     width: 60px;
     height: 60px;
     border-radius: 60px;
-}
-.tweet-username{
-    margin-left: 10px;
-    float: left;
-    margin-top: 20px;
-    font-size: 20px;
-}
-.tweet-text{
-    float: left;
-    width: 100%;
-    margin-top: 10px;
-    padding: 5px;
-}
-.links{
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    text-decoration: none;
-}
-.buttons{
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-}
-.buttons>a:hover, .links:hover{
-    text-decoration: none;
 }
 
 
