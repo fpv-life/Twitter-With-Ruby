@@ -4,19 +4,23 @@
     </div>
 
 
-    <div class='col-md-6 page-borders'>
-        <div class='container header color'>
+    <div class='col-md-6 page-borders no-padding'>
+        <div class='container header color header-container'>
            <h1>Home</h1>
         </div>
 
-        <div class='container'>
+        <div class='container no-padding'>
           <%= render 'form', feed: @feed %>
         </div>
 
         <% @feeds.each do |feed| %>
         <div class='container feed'>
           <div class='tweet-image'>
-            <%= image_tag(feed.user.avatar, class:"avatar-image") %>
+            <% if feed.user.avatar.attached? %>
+              <%= image_tag(feed.user.avatar, class: "feed-avatar")  %><br/>
+            <% else %>
+              <%= image_tag("/assets/avatar.png", class: "feed-avatar") %><br/>
+            <% end %>
           </div>
           <div class='tweet-time'>
             <%= feed.time %>
@@ -29,22 +33,21 @@
           </div>
           
           
-          <% if !(feed.picture.nil? || feed.picture.empty?) %>
-            <%= image_tag(feed.picture, class:"avatar-image") %>
+          <% if feed.image.attached? %>
+            <%= image_tag(feed.image, class:"feed-image") %>
           <% end %>
 
-          <% if current_user.email === feed.user.email %>
+          <% if !current_user.nil? %>
             <% if current_user.voted_up_for? feed %>
-              <%= link_to "Downvote", dislike_feed_path(feed.id), method: :put, class: "links" %>
-            <% else %>
-              <%= link_to "Upvote", like_feed_path(feed.id), method: :put, class: "links" %>
+                <%= link_to "Downvote (" + feed.votes_for.size.to_s + ")", dislike_feed_path(feed.id), method: :put, class: "links" %>
+              <% else %>
+                <%= link_to "Upvote (" + feed.votes_for.size.to_s + ")", like_feed_path(feed.id), method: :put, class: "links" %>
             <% end %>
-            
-            <div class="buttons">
-              <%= link_to 'Show', feed %>
-              <%= link_to 'Edit', edit_feed_path(feed) %>
-              <%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %>
-            </div>
+            <% if current_user.email === feed.user.email %>              
+              <div class="buttons">
+                <%= link_to('Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }) %>
+              </div>
+            <% end %>
           <% end %>
           
 

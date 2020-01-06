@@ -40,6 +40,7 @@ class FeedsController < ApplicationController
   def create
     @feed = Feed.new(feed_params)
     @feed.user = current_user
+    @feed.image.attach(params[:feed][:image])
     respond_to do |format|
       if @feed.save
         format.html { redirect_to @feed, notice: 'Feed was successfully created.' }
@@ -57,7 +58,7 @@ class FeedsController < ApplicationController
     respond_to do |format|
       if @feed.update(feed_params)
         format.html { redirect_to @feed, notice: 'Feed was successfully updated.' }
-        format.json { render :show, status: :ok, location: @feed }
+        format.json { render :feeds, status: :ok, location: @feed }
       else
         format.html { render :edit }
         format.json { render json: @feed.errors, status: :unprocessable_entity }
@@ -69,6 +70,7 @@ class FeedsController < ApplicationController
   # DELETE /feeds/1.json
   def destroy
     @feed.destroy
+    @feed.image.purge
     respond_to do |format|
       format.html { redirect_to feeds_url, notice: 'Feed was successfully destroyed.' }
       format.json { head :no_content }
@@ -83,6 +85,6 @@ class FeedsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def feed_params
-      params.require(:feed).permit(:text, :picture, :time, :reported)
+      params.require(:feed).permit(:text, :picture, :time, :reported, :image)
     end
 end

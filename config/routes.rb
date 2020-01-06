@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   resources :lists
   resources :feeds
-  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks', registrations: 'registrations'}
   root to:'feeds#index'
   match '/users',   to: 'users#index',   via: 'get'
   mount Commontator::Engine => '/commontator'

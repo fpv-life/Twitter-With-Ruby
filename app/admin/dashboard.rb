@@ -7,23 +7,40 @@ ActiveAdmin.register_page "Dashboard" do
     #
      columns do
        column do
-         panel "Recent Feed" do
-           ul do
-              # Feed.recent(1).map do |feed|
-              #  li link_to(feed.text, admin_post_path(feed))
-              # end
+         panel "Reported Feeds" do
               Feed.all.map do |feed|
-               li link_to(feed.text)#, admin_post_path(feed))
+                #if feed.reported === 'no'
+                  div class:"feed" do
+                    div class:'tweet-image' do
+                      image_tag("/assets/avatar.png", class:"avatar-image")
+                    end
+                    div class:'tweet-time' do
+                      feed.time
+                    end
+                    div class:'tweet-username' do
+                      feed.user.username
+                    end
+                    div class:'tweet-text' do
+                      feed.text
+                    end
+                    if !(feed.picture.nil? || feed.picture.empty?)
+                      image_tag(feed.picture, class:"avatar-image")
+                    end
+  
+                    div class:'buttons' do
+                      link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }
+                    end
+                  end
+
+
+                    
+                    
+                    
+                  
+                #end
               end
-           end
          end
        end
-
-    #   columns do
-    #    panel "Info" do
-    #     para "Welcome to ActiveAdmin."
-    #    end
-    #   end
      end
-  end # content
+  end 
 end

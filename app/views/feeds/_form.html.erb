@@ -11,27 +11,40 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :text %>
-    <%= form.text_area :text, id: :feed_text %>
+  <div class="field height-input">
+    <% @users = current_user %>
+    <% if user_signed_in? %>
+      <%= image_tag(@user.avatar, class: "feed-avatar feed-margin") if @user.avatar.attached? %>
+    <% else %>
+      <%= image_tag("/assets/avatar.png", class: "feed-avatar feed-margin") %>
+    <% end %>
+
+    <%= form.text_area :text, id: :feed_text, placeholder: "What is going on?", class: "text-input feed-margin" %>
+    <%= form.submit "Post", class: "btn btn-primary float-right" %>
+    <div class="fileUpload btn btn-primary float-right">
+      <span>Upload</span>
+      <%= form.file_field :image, class: "upload" %>
+    </div>
   </div>
 
-  <div class="field">
+  <hr class="">
+
+  <div class="field no-display">
     <%= form.label :picture %>
     <%= form.text_field :picture, id: :feed_picture %>
   </div>
 
-  <div class="field">
+  <div class="field no-display">
     <%= form.label :time %>
     <%= form.datetime_select :time, id: :feed_time %>
   </div>
 
-  <div class="field">
+  <div class="field no-display">
     <%= form.label :reported %>
-    <%= form.text_field :reported, id: :feed_reported %>
+    <%= form.text_field :reported, id: :feed_reported, value: "none" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions no-display">
+    <%= form.submit "Post", class: "btn btn-primary" %>
   </div>
 <% end %>

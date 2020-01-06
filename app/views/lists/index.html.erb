@@ -26,7 +26,7 @@
           <% @users.each do |user| %>
               <% unless user == current_user %>
               <div class="people-lists">
-                  <%= image_tag(user.avatar,  alt: "/assets/" +  user.avatar + ".png", class: "people-image") %>
+                  <%= image_tag(user.avatar,  alt: "/assets/avatar.png", class: "people-image") %>
                   <%= user.username %>
                   <% if user_signed_in? %>
                       <% unless user == current_user %>

@@ -13,6 +13,7 @@ class User < ApplicationRecord
   acts_as_followable
   acts_as_follower
   acts_as_voter
+  has_one_attached :avatar
 
   def self.new_with_session(params, session)
     super.tap do |user|
