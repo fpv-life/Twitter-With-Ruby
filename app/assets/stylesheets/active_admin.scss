@@ -19,9 +19,9 @@
     border: 0.5px silver solid !important;
     background-color: white !important;
     border-radius: 20px;
-    min-height: 150px;
+    min-height: 200px;
     position: relative;
-    width: 100%;
+    padding: 10px;
 }
 .tweet-time{
     float: right;
@@ -48,6 +48,7 @@
     width: 100%;
     margin-top: 10px;
     padding: 5px;
+    min-height: 20px;
 }
 .links{
     position: absolute;
@@ -62,4 +63,14 @@
 }
 .buttons>a:hover, .links:hover{
     text-decoration: none;
+}
+.height-input{
+    height: 120px !important;
+}
+.float-right{
+    float: right;
+}
+.feed-image{
+    width: 100%;
+    margin-bottom: 40px;
 }

@@ -13,8 +13,12 @@
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
             <%= render "devise/shared/error_messages", resource: resource %>
             <div class="field">
-            <%= image_tag(@user.avatar, class: "profile-avatar") if @user.avatar.attached? %> <br/>
-</div>
+              <% if current_user.avatar.attached? %>
+                <%= image_tag(current_user.avatar, class: "profile-avatar")  %><br/>
+              <% else %>
+                <%= image_tag("/assets/avatar.png", class: "profile-avatar") %><br/>
+              <% end %>
+            </div>
             <% if !current_user.provider? %>
               <div class="field">
                 <%= f.label :email %><br />
@@ -52,7 +56,23 @@
 
             <div class="field">
               <%= f.label :born_date %></i><br />
-              <%= f.date_field :born_date, id: :user_born_date, class: "form-control datepicker"  %>
+              <%= f.date_field :born_date, id: :user_born_date, class: "form-control datepicker", name: "born"  %>
+              <script>
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth()+1;
+                var yyyy = today.getFullYear();
+
+                if(dd<10){
+                  dd='0'+dd
+                } 
+                if(mm<10){
+                  mm='0'+mm
+                } 
+
+                today = yyyy+'-'+mm+'-'+dd;
+                document.getElementsByName("born")[0].setAttribute("max", today);
+              </script>
             </div>
             <div class="fileUpload btn btn-primary float-right">
               <span>Upload</span>

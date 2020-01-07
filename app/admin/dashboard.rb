@@ -9,10 +9,14 @@ ActiveAdmin.register_page "Dashboard" do
        column do
          panel "Reported Feeds" do
               Feed.all.map do |feed|
-                #if feed.reported === 'no'
+                if feed.reported.empty?
                   div class:"feed" do
                     div class:'tweet-image' do
-                      image_tag("/assets/avatar.png", class:"avatar-image")
+                      if feed.user.avatar.attached?
+                        image_tag(feed.user.avatar, class: "avatar-image")
+                      else
+                        image_tag("/assets/avatar.png", class: "avatar-image")
+                      end
                     end
                     div class:'tweet-time' do
                       feed.time
@@ -23,21 +27,14 @@ ActiveAdmin.register_page "Dashboard" do
                     div class:'tweet-text' do
                       feed.text
                     end
-                    if !(feed.picture.nil? || feed.picture.empty?)
-                      image_tag(feed.picture, class:"avatar-image")
+                    if feed.image.attached?
+                      image_tag(feed.image, class:"feed-image")
                     end
-  
                     div class:'buttons' do
                       link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }
                     end
-                  end
-
-
-                    
-                    
-                    
-                  
-                #end
+                  end                       
+                end
               end
          end
        end

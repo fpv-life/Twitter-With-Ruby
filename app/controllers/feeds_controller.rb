@@ -4,13 +4,13 @@ class FeedsController < ApplicationController
   def upvote
     @feed = Feed.find(params[:id])
     @feed.liked_by current_user
-    redirect_to @feed
+    redirect_to root_path
   end
   
   def downvote
     @feed = Feed.find(params[:id])
     @feed.downvote_from current_user
-    redirect_to @feed
+    redirect_to root_path
   end
 
   # GET /feeds
@@ -58,7 +58,7 @@ class FeedsController < ApplicationController
     respond_to do |format|
       if @feed.update(feed_params)
         format.html { redirect_to @feed, notice: 'Feed was successfully updated.' }
-        format.json { render :feeds, status: :ok, location: @feed }
+        format.json { render :show, status: :ok, location: @feed }
       else
         format.html { render :edit }
         format.json { render json: @feed.errors, status: :unprocessable_entity }
