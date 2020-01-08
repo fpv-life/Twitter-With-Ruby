@@ -14,6 +14,7 @@
         </div>
 
         <% @feeds.each do |feed| %>
+        <% if user_signed_in? %>
         <% if feed.user.username === current_user.username || current_user.following?(feed.user) %>
           <div class='container feed'>
             <div class='tweet-image'>
@@ -54,6 +55,7 @@
           </div>
           <%= commontator_thread(feed) %>
           <% end %>
+        <% end %>
         <% end %>
     </div>
     
