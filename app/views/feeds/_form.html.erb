@@ -13,18 +13,20 @@
 
   <div class="field height-input">
     <% @users = current_user %>
-    <% if user_signed_in? %>
-      <%= image_tag(@user.avatar, class: "feed-avatar feed-margin") if @user.avatar.attached? %>
+    <% if user_signed_in? && @user.avatar.attached? %>
+      <%= image_tag(@user.avatar, class: "feed-avatar feed-margin")%>
     <% else %>
       <%= image_tag("/assets/avatar.png", class: "feed-avatar feed-margin") %>
     <% end %>
 
-    <%= form.text_area :text, id: :feed_text, placeholder: "What is going on?", class: "text-input feed-margin" %>
-    <%= form.submit "Post", class: "btn btn-primary float-right" %>
-    <div class="fileUpload btn btn-primary float-right">
-      <span>Upload</span>
-      <%= form.file_field :image, class: "upload" %>
-    </div>
+    <%= form.text_area :text, id: :feed_text, placeholder: "What is going on?", class: "text-input" %>
+    <% if user_signed_in? %>
+      <%= form.submit "Post", class: "btn btn-primary float-right create-buttons" %>
+      <div class="fileUpload btn btn-primary float-right">
+        <span>Upload</span>
+        <%= form.file_field :image, class: "upload", accept: ".jpg,.png,.jpeg" %>
+      </div>
+    <% end %>
   </div>
 
   <hr class="">

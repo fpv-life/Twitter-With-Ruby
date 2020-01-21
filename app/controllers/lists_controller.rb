@@ -4,8 +4,12 @@ class ListsController < ApplicationController
   # GET /lists
   # GET /lists.json
   def index
-    @lists = List.all
-    @feeds = Feed.all
+    if user_signed_in?
+      @lists = List.all
+      @feeds = Feed.all
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   # GET /lists/1

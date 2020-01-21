@@ -9,7 +9,7 @@ ActiveAdmin.register_page "Dashboard" do
        column do
          panel "Reported Feeds" do
               Feed.all.map do |feed|
-                if feed.reported.empty?
+                if feed.reported == "true"
                   div class:"feed" do
                     div class:'tweet-image' do
                       if feed.user.avatar.attached?
@@ -25,13 +25,16 @@ ActiveAdmin.register_page "Dashboard" do
                       feed.user.username
                     end
                     div class:'tweet-text' do
-                      feed.text
+                      highlight(feed.text, /#\w+/, highlighter: '<a href="search?q=\1">\1</a>')
                     end
                     if feed.image.attached?
                       image_tag(feed.image, class:"feed-image")
                     end
                     div class:'buttons' do
-                      link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }
+                      link_to('Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' })
+                    end
+                    div class:'button' do
+                      link_to('Pardon', pardon_feed_path(feed.id), method: :put)
                     end
                   end                       
                 end

@@ -18,7 +18,6 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.omniauth :google_oauth2, '510339473946-n0slb2341q8799u4dt3q5dgv3aii557p.apps.googleusercontent.com', 'mtBzvUE4zuVkDBcWCrwVDwb3', {}
 
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
   # Configure the class responsible to send e-mails.
@@ -261,6 +260,7 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   config.omniauth :facebook, "1085994805119832", "122cf292e3a5ebe82f27edd6bddb7538", callback_url: "http://localhost:3000/users/auth/facebook/callback"
+  config.omniauth :google_oauth2, '510339473946-n0slb2341q8799u4dt3q5dgv3aii557p.apps.googleusercontent.com', 'mtBzvUE4zuVkDBcWCrwVDwb3', skip_jwt: true
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     member do
       put "like", to: "feeds#upvote"
       put "dislike", to: "feeds#downvote"
+      put "report", to: "feeds#report"
+      put "pardon", to: "feeds#pardon"
     end
   end
+  get 'users/:id' => 'users#show'
 end

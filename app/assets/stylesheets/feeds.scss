@@ -110,6 +110,9 @@ h1{
     bottom: 10px;
     right: 10px;
 }
+.buttons>a{
+    margin-right: 10px;
+}
 .buttons>a:hover, .links:hover{
     text-decoration: none;
 }
@@ -142,6 +145,15 @@ h1{
     border-radius: 60px;
     margin-bottom: 10px;
 }
+.people-names{
+    color: white;
+    transition: 0.5s;
+}
+.people-names:hover{
+    transition: 0.5s;
+    color: #007bff;
+    text-decoration: none;
+}
 
 // Feed input
 .feed-avatar{
@@ -158,9 +170,11 @@ h1{
     width: 80%;
     margin-left: auto;
     margin-right: auto;
+    margin-right: 20px;
 }
 .feed-input{
     height: 150px !important;
+    position: relative;
 }
 .no-display{
     display: none;
@@ -182,8 +196,11 @@ h1{
     filter: alpha(opacity=0);
 }
 .float-right{
-    float: right;
-    margin-right: 10px;
+    float: left;
+}
+.create-buttons{
+    margin-left: 10px;
+    margin-right: 30px;
 }
 .feed-margin{
     margin-left: 10px;
@@ -200,5 +217,4 @@ h1{
     height: 100px;
     width: 100px;
     border-radius: 60px;
-    margin-left: 40%;
 }

@@ -1,5 +1,5 @@
 class FeedsController < ApplicationController
-  before_action :set_feed, only: [:show, :edit, :update, :destroy]
+  before_action :set_feed, only: [:show, :edit, :update, :destroy, :report, :pardon]
 
   def upvote
     @feed = Feed.find(params[:id])
@@ -24,6 +24,7 @@ class FeedsController < ApplicationController
   # GET /feeds/1
   # GET /feeds/1.json
   def show
+    
   end
 
   # GET /feeds/new
@@ -43,7 +44,7 @@ class FeedsController < ApplicationController
     @feed.image.attach(params[:feed][:image])
     respond_to do |format|
       if @feed.save
-        format.html { redirect_to @feed, notice: 'Feed was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Feed was successfully created.' }
         format.json { render :show, status: :created, location: @feed }
       else
         format.html { render :new }
@@ -75,6 +76,17 @@ class FeedsController < ApplicationController
       format.html { redirect_to feeds_url, notice: 'Feed was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def report
+    @feed.reported = "true"
+    @feed.save
+  end
+
+  def pardon
+    @feed.reported = "none"
+    @feed.save
+    redirect_to admin_root_path
   end
 
   private

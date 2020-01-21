@@ -97,46 +97,47 @@
         </div>
 
         <% @feeds.each do |feed| %>
-          <div class='container feed list-likes'>
-            <div class='tweet-image'>
-              <% if feed.user.avatar.attached? %>
-                <%= image_tag(feed.user.avatar, class: "avatar-image")  %>
-              <% else %>
-                <%= image_tag("/assets/avatar.png", class: "avatar-image") %>
-              <% end %>
-            </div>
-            <div class='tweet-time'>
-              <%= feed.time %>
-            </div>
-            <div class='tweet-username'>
-              <%= feed.user.username %>
-            </div>
-            <div class='tweet-text'>
-              <%= feed.text %>
-            </div>
-            
-            
-            <% if feed.image.attached? %>
-              <%= image_tag(feed.image, class:"feed-image") %>
-            <% end %>
-
-              <% if current_user %>
-                <% if current_user.voted_up_for? feed %>
-                  <%= link_to "Downvote (" + feed.weighted_score.to_s + ")", dislike_feed_path(feed.id), method: :put, class: "links" %>
+          <% if current_user.voted_as_when_voted_for feed %>
+            <div class='container feed list-likes'>
+              <div class='tweet-image'>
+                <% if feed.user.avatar.attached? %>
+                  <%= image_tag(feed.user.avatar, class: "avatar-image")  %>
                 <% else %>
-                  <%= link_to "Upvote (" + feed.weighted_score.to_s + ")", like_feed_path(feed.id), method: :put, class: "links" %>
+                  <%= image_tag("/assets/avatar.png", class: "avatar-image") %>
                 <% end %>
+              </div>
+              <div class='tweet-time'>
+                <%= feed.time %>
+              </div>
+              <div class='tweet-username'>
+                <%= feed.user.username %>
+              </div>
+              <div class='tweet-text'>
+                <%= highlight(feed.text, /#\w+/, highlighter: '<a href="search?q=\1">\1</a>') %>
+              </div>
 
-                <% if current_user.email === feed.user.email %>                
+              <% if feed.image.attached? %>
+                <%= image_tag(feed.image, class:"feed-image") %>
+              <% end %>
+
+              <% if !current_user.nil? %>
+                <% if current_user.voted_up_for? feed %>
+                    <%= link_to "Downvote (" + feed.weighted_score.to_s + ")", dislike_feed_path(feed.id), method: :put, class: "links" %>
+                  <% else %>
+                    <%= link_to "Upvote (" + feed.weighted_score.to_s + ")", like_feed_path(feed.id), method: :put, class: "links" %>
+                <% end %>
+                <% if current_user.email === feed.user.email %>              
                   <div class="buttons">
-                    <%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    <%= link_to('Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }) %>
+                    <%= link_to "Report", report_feed_path(feed.id), method: :put %>
                   </div>
                 <% end %>
               <% end %>
-          </div>
-          <div class="list-likes">
-            <%= commontator_thread(feed) %>
-          </div>
+            </div>
+            <div class="list-likes">
+              <%= commontator_thread(feed) %>
+            </div>
+          <% end %>
         <% end %>
     </div>
     

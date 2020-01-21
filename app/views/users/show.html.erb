@@ -1,0 +1,113 @@
+<div class='row'>
+    <div class='col-md-3'>
+      <%= render 'layouts/menu' %>  
+    </div>
+
+
+    <div class='col-md-6 page-borders no-padding'>
+        <div class='col-md-2 header color'>
+           <h1>Profile</h1>
+        </div>
+        <hr class='line'>
+        <div class="form-profile">
+            <div class="field text-center">
+              <% if @user.avatar.attached? %>
+                <%= image_tag(@user.avatar, class: "profile-avatar")  %><br/>
+              <% else %>
+                <%= image_tag("/assets/avatar.png", class: "profile-avatar") %><br/>
+              <% end %>
+            </div>
+
+            <div class="field text-center">
+                <label> <%= @user.username %></label><br/>
+            </div>
+
+            <div class="field">
+              <% if user_signed_in? %>
+                <% unless user == current_user %>
+                  <% if current_user.following?(user) %>
+                    <%= button_to("Un-Follow", user_follow_path(user.to_param, current_user.get_follow(user).id), :method => :delete, :remote => true, class: 'btn btn-primary') %>
+                  <% else %>
+                    <%= button_to("Follow", user_follows_path(user.to_param), :remote => true, class: 'btn btn-primary') %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+
+            <div class="field">
+                <label>Email</label><br/>
+                <input type="text" class="form-control" disabled value=<%= @user.email %>>
+            </div>
+
+            <div class="field">
+                <label>Bio</label><br/>
+                <textarea class="edit-bio" disabled> <%= @user.bio %> </textarea>
+            </div>
+
+            <div class="field">
+                <label>Location</label><br/>
+                <input type="text" class="form-control" disabled value=<%= @user.location %>>
+            </div>
+
+            <div class="field">
+                <label>Born</label><br/>
+                <input type="date" class="form-control datepicker" disabled value=<%= @user.born_date %>>
+            </div>
+          <%= link_to "Back", root_path %>
+        </div>
+        <hr class="line">
+        <div class="form-profile">
+        
+        <% @feeds.each do |feed| %>
+        <% if user_signed_in? %>
+          <% if feed.user.username === current_user.username || current_user.following?(feed.user) %>
+            <div class='container feed'>
+              <div class='tweet-image'>
+                <% if feed.user.avatar.attached? %>
+                  <%= image_tag(feed.user.avatar, class: "feed-avatar")  %><br/>
+                <% else %>
+                  <%= image_tag("/assets/avatar.png", class: "feed-avatar") %><br/>
+                <% end %>
+              </div>
+              <div class='tweet-time'>
+                <%= feed.time %>
+              </div>
+              <div class='tweet-username'>
+                <%= feed.user.username %>
+              </div>
+              <div class='tweet-text'>
+                <%= feed.text %>
+              </div>
+              
+              
+              <% if feed.image.attached? %>
+                <%= image_tag(feed.image, class:"feed-image") %>
+              <% end %>
+
+              <% if !current_user.nil? %>
+                <% if current_user.voted_up_for? feed %>
+                    <%= link_to "Downvote (" + feed.weighted_score.to_s + ")", dislike_feed_path(feed.id), method: :put, class: "links" %>
+                  <% else %>
+                    <%= link_to "Upvote (" + feed.weighted_score.to_s + ")", like_feed_path(feed.id), method: :put, class: "links" %>
+                <% end %>
+                <% if current_user.email === feed.user.email %>              
+                  <div class="buttons">
+                    <%= link_to('Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }) %>
+                  </div>
+                <% end %>
+              <% end %>
+
+            </div>
+            <%= commontator_thread(feed) %>
+            <% end %>
+          <% end %>
+        <% end %>
+        </div>
+    </div>
+
+    <div class='col-md-3 color'>
+      <%= render 'layouts/people' %>  
+    </div>
+</div>
+
+

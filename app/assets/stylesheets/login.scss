@@ -62,11 +62,11 @@ body{
 /* Shared */
 .loginBtn:hover{
   cursor: pointer;
+  text-decoration: none;
 }
 .loginBtn {
   box-sizing: border-box;
   position: relative;
-  width: 300px;
   margin: 0.2em;
   padding: 5px;
   padding-left: 40px;

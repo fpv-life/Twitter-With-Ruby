@@ -12,7 +12,7 @@
         <div class="form-profile">
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
             <%= render "devise/shared/error_messages", resource: resource %>
-            <div class="field">
+            <div class="field text-center">
               <% if current_user.avatar.attached? %>
                 <%= image_tag(current_user.avatar, class: "profile-avatar")  %><br/>
               <% else %>
@@ -43,6 +43,11 @@
                 <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"  %>
               </div>
             <% end %>
+
+            <div class="field">
+              <%= f.label :username %></i><br />
+              <%= f.text_field :username, id: :user_username, class: "form-control"  %>
+            </div>
 
             <div class="field">
               <%= f.label :bio %></i><br />
