@@ -70,6 +70,8 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+DATABASE_URL=$(heroku config:get DATABASE_URL -a your-app) your_process
+
 production:
   <<: *default
   database: twitter_production
