@@ -7,6 +7,10 @@
     <div class='col-md-6 page-borders no-padding'>
         <div class='container header color header-container'>
            <h1>Home</h1>
+            <%= form_tag(feeds_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
+              <%= text_field_tag :search, params[:search], placeholder: "Search HashTag", class: "form-control mr-sm-2" %>
+              <%= submit_tag "Search", class: "btn btn-primary" %>
+            <% end %>
         </div>
 
         <div class='container no-padding'>

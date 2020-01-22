@@ -16,9 +16,15 @@ class FeedsController < ApplicationController
   # GET /feeds
   # GET /feeds.json
   def index
-    @feeds = Feed.all
-    @user = current_user
-    @feed = Feed.new
+    if params[:search]
+      @feeds = Feed.search(params[:search])
+      @user = current_user
+      @feed = Feed.new
+    else
+      @feeds = Feed.all
+      @user = current_user
+      @feed = Feed.new
+    end
   end
 
   # GET /feeds/1
