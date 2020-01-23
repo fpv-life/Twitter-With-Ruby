@@ -35,7 +35,7 @@
                 <%= feed.user.username %>
               </div>
               <div class='tweet-text'>                
-                <%= highlight(feed.text, /#\w+/, highlighter: '<a href="search?q=\1">\1</a>') %>
+                <%= highlight(feed.text, /#\w+/, highlighter: '<a href="feeds?utf8=✓&search=\1&commit=Search">\1</a>') %>
               </div>
               
               <% if feed.image.attached? %>
@@ -74,7 +74,7 @@
                 <%= feed.user.username %>
               </div>
               <div class='tweet-text'>                
-                <%= highlight(feed.text, /#\w+/, highlighter: '<a href="search?q=\1">\1</a>') %>
+                <%= highlight(feed.text, /#\w+/, highlighter: '<a href="feeds?utf8=✓&search=\1&commit=Search">\1</a>') %>
               </div>
               
               <% if feed.image.attached? %>
