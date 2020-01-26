@@ -39,6 +39,7 @@ ul{
 }
 .header{
     margin-bottom: 10px;
+    position: relative;
 }
 .header-container{
     border-bottom: solid silver 0.5px;
@@ -64,6 +65,17 @@ h1{
     text-align: center;
 }
 
+.search-index{
+    text-align: left;
+    width: 20%;
+}
+
+.search-form{
+    position: absolute;
+    top: 12px;
+    right: 20px;
+}
+
 .feed{
     border: 0.5px silver solid !important;
     background-color: white !important;
@@ -71,6 +83,8 @@ h1{
     min-height: 200px;
     position: relative;
     width: 90%;
+    margin-bottom: 20px;
+    transition: 0.5s;
 }
 .tweet-time{
     float: right;
@@ -109,12 +123,14 @@ h1{
     position: absolute;
     bottom: 10px;
     right: 10px;
+    color: #007bff;
 }
 .buttons>a{
     margin-right: 10px;
 }
 .buttons>a:hover, .links:hover{
     text-decoration: none;
+    cursor: pointer;
 }
 .height-input{
     height: 120px !important;
@@ -125,6 +141,50 @@ h1{
 .feed-image{
     width: 100%;
     margin-bottom: 40px;
+}
+.comment-form{
+    display: none;
+    position: relative;
+}
+.comment-text{
+    width: 80% !important;
+    float: left;
+}
+.comments{
+    display: none;
+    position: absolute;
+    top: 200px;
+    width: 95%;
+}
+.comment-avatar{
+    height: 50px;
+    width: 50px;
+    border-radius: 40px;
+}
+.comment-date{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.comments-feed{
+    margin-bottom: 10px;
+    position: relative;
+    border: 1px solid silver;
+}
+.avatar-username{
+    border-right: 1px solid silver;
+    height: 50px;
+    width: 20%;
+}
+.comments-text{
+    position: absolute;
+    top: 0;
+    left: 25%;
+}
+.comment-delete{
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 // People 
 

@@ -6,8 +6,8 @@
 
     <div class='col-md-6 page-borders no-padding'>
         <div class='container header color header-container'>
-           <h1>Home</h1>
-            <%= form_tag(feeds_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0") do %>
+           <h1 class="search-index">Home</h1>
+            <%= form_tag(feeds_path, :method => "get", id: "search-form", class: "form-inline my-2 my-lg-0 search-form") do %>
               <%= text_field_tag :search, params[:search], placeholder: "Search HashTag", class: "form-control mr-sm-2" %>
               <%= submit_tag "Search", class: "btn btn-primary" %>
             <% end %>
@@ -17,6 +17,7 @@
           <%= render 'form', feed: @feed %>
         </div>
 
+        <% @count = 0 %>
         <% @feeds.each do |feed| %>
         <% if user_signed_in? %>
           <% if feed.user.username === current_user.username || current_user.following?(feed.user) %>
@@ -48,16 +49,66 @@
                   <% else %>
                     <%= link_to "Upvote (" + feed.weighted_score.to_s + ")", like_feed_path(feed.id), method: :put, class: "links" %>
                 <% end %>
-                <% if current_user.email === feed.user.email %>              
-                  <div class="buttons">
+                
+                <div class="buttons">
+                  <% if current_user.email === feed.user.email %>              
                     <%= link_to('Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }) %>
-                    <%= link_to "Report", report_feed_path(feed.id), method: :put %>
-                  </div>
-                <% end %>
+                  <% end %>
+                  <%= link_to "Report", report_feed_path(feed.id), method: :put %>
+                  <a onclick='Comment(<%= @count %>)' class='comment'>Comment</a>
+                </div>
+
+               <div class="comments">
+                  <% @commentShow.each do |comment| %>
+                    <% if comment.feed_id === feed.id %>
+                      <div class="container comments-feed">
+                        <div class="avatar-username">
+                          <% if comment.user.avatar.attached? %>
+                            <%= image_tag(comment.user.avatar, class: "comment-avatar")  %>
+                          <% else %>
+                            <%= image_tag("/assets/avatar.png", class: "comment-avatar") %>
+                          <% end %>
+                          <%= comment.user.username %>
+                        </div>
+                        <span class="comments-text">
+                          <%= comment.reply %>
+                        </span>
+                        <span class="comment-date"><%= comment.posted %></span>
+                        <span class="comment-delete buttons"><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+
+                <%= render '/comments/form', comment: @comment %>
+                     
+ 
+
+
+                <script>
+                  var Comment = function(count){
+                    var comment = document.getElementsByClassName("comment-form")[count];
+                    var show = document.getElementsByClassName("comments")[count];
+                    var feed = document.getElementsByClassName("feed")[count];
+                    var text = document.getElementsByClassName("comment")[count];
+
+                    if(comment.style.display == "block"){
+                      comment.style.display = "none";
+                      show.style.display = "none";
+                      text.innerHTML = "Comment";
+                      feed.style.minHeight = "200px";
+                    }else{
+                      comment.style.display = "block";
+                      show.style.display = "block";
+                      text.innerHTML = "Hide Comments";
+                      feed.style.minHeight = "500px";
+                    }                    
+                  }
+                </script>
               <% end %>
             </div>
-            <%= commontator_thread(feed) %>
             <% end %>
+            <% @count = @count + 1 %>
           <% else %>
             <div class='container feed'>
               <div class='tweet-image'>

@@ -5,7 +5,7 @@
 
 
     <div class='col-md-6 page-borders no-padding'>
-        <div class='col-md-2 header color'>
+        <div class='container header color'>
            <h1>Profile</h1>
         </div>
         <hr class='line'>
@@ -22,8 +22,9 @@
                 <label> <%= @user.username %></label><br/>
             </div>
 
-            <div class="field">
+            <div class="field text-center">
               <% if user_signed_in? %>
+                <% user = @user %>
                 <% unless user == current_user %>
                   <% if current_user.following?(user) %>
                     <%= button_to("Un-Follow", user_follow_path(user.to_param, current_user.get_follow(user).id), :method => :delete, :remote => true, class: 'btn btn-primary') %>
@@ -60,7 +61,7 @@
         
         <% @feeds.each do |feed| %>
         <% if user_signed_in? %>
-          <% if feed.user.username === current_user.username || current_user.following?(feed.user) %>
+          <% if feed.user.username === user.username %>
             <div class='container feed'>
               <div class='tweet-image'>
                 <% if feed.user.avatar.attached? %>

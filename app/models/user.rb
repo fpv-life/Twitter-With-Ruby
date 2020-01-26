@@ -8,6 +8,8 @@ class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: [:google_oauth2, :facebook]
 
   has_many :feeds, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
   acts_as_commontator
   acts_as_followable
   acts_as_follower

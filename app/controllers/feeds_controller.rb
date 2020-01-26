@@ -24,6 +24,8 @@ class FeedsController < ApplicationController
       @feeds = Feed.all
       @user = current_user
       @feed = Feed.new
+      @comment = Comment.new
+      @commentShow = Comment.all
     end
   end
 
