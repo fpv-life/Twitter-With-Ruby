@@ -16,19 +16,12 @@ On the site, you can:
 - the administrator can also delete posts,
 - you can also use #something in posts to mark them and when you click the link you will be redirected to the page with tweets only having the #something in the text.
 
-For this project to work all you need to do is download the files, upload the database to a server and that is it. The api's used are being either already hosted with the files or are being accessed directly by url's. The database is MySql 5.0 and is used with phpmyadmin.
+All the gems are present inside the GemFile, and all you need to do is run bundle install.
 
-Localhost
-If used for localhost you will need to place the files in XAMPP, folder on your computer,  and use it with Apache and MySql turned on.
-
-[Twitter](https://www.tilenkelc.si/twitter "Twitter")
+[Twitter](https://tweets-school.herokuapp.com "Twitter")
 
 The main twitter page
-![alt text](https://github.com/fpv-life/Twitter/blob/master/img/twitter.PNG)
-
-
-The database in ToadDatabaseModeler
-![alt text](https://github.com/fpv-life/Twitter/blob/master/img/Zajeta%20slika.PNG)
+![alt text](https://github.com/fpv-life/Twitter-With-Ruby/blob/master/app/assets/images/twitter-ruby-index.PNG)
 
 
 
