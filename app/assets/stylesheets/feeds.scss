@@ -141,6 +141,7 @@ h1{
 .feed-image{
     width: 100%;
     margin-bottom: 40px;
+    transition: 0.5s;
 }
 .comment-form{
     display: none;
@@ -149,6 +150,7 @@ h1{
 .comment-text{
     width: 80% !important;
     float: left;
+    margin-bottom: 20px;
 }
 .comments{
     display: none;

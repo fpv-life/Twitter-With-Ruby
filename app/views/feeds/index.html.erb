@@ -18,6 +18,7 @@
         </div>
 
         <% @count = 0 %>
+        <% @countImg = -1 %>
         <% @feeds.each do |feed| %>
         <% if user_signed_in? %>
           <% if feed.user.username === current_user.username || current_user.following?(feed.user) %>
@@ -41,6 +42,7 @@
               
               <% if feed.image.attached? %>
                 <%= image_tag(feed.image, class:"feed-image") %>
+                <% @countImg = @countImg + 1 %>
               <% end %>
 
               <% if !current_user.nil? %>
@@ -49,18 +51,12 @@
                   <% else %>
                     <%= link_to "Upvote (" + feed.weighted_score.to_s + ")", like_feed_path(feed.id), method: :put, class: "links" %>
                 <% end %>
-                
-                <div class="buttons">
-                  <% if current_user.email === feed.user.email %>              
-                    <%= link_to('Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }) %>
-                  <% end %>
-                  <%= link_to "Report", report_feed_path(feed.id), method: :put %>
-                  <a onclick='Comment(<%= @count %>)' class='comment'>Comment</a>
-                </div>
 
-               <div class="comments">
+                <% @countComments = 0 %>
+                <div class="comments">
                   <% @commentShow.each do |comment| %>
                     <% if comment.feed_id === feed.id %>
+                      <% @countComments = @countComments + 1 %>
                       <div class="container comments-feed">
                         <div class="avatar-username">
                           <% if comment.user.avatar.attached? %>
@@ -78,6 +74,14 @@
                       </div>
                     <% end %>
                   <% end %>
+                </div>
+
+                <div class="buttons">
+                  <% if current_user.email === feed.user.email %>              
+                    <%= link_to('Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }) %>
+                  <% end %>
+                  <%= link_to "Report", report_feed_path(feed.id), method: :put %>
+                  <a onclick='Comment(<%= @count %>,<%= @countImg %>, <%= @countImg %>)' class='comment'>Comment</a>
                 </div>
 
                 <%= form_with(model: @comment, local: true) do |form| %>
@@ -112,8 +116,9 @@
                 <% end %>
 
                 <script>
-                  var Comment = function(count){
+                  var Comment = function(count, set, countImg){
                     var comment = document.getElementsByClassName("comment-form")[count];
+                    var image = document.getElementsByClassName("feed-image")[countImg];
                     var show = document.getElementsByClassName("comments")[count];
                     var feed = document.getElementsByClassName("feed")[count];
                     var text = document.getElementsByClassName("comment")[count];
@@ -122,12 +127,22 @@
                       comment.style.display = "none";
                       show.style.display = "none";
                       text.innerHTML = "Comment";
+                      image.style.display = "block";
                       feed.style.minHeight = "200px";
                     }else{
                       comment.style.display = "block";
+                      image.style.display = "none";
+                      feed.style.minHeight = "200px";
                       show.style.display = "block";
                       text.innerHTML = "Hide Comments";
-                      feed.style.minHeight = "500px";
+                      var min = feed.style.minHeight;
+                      var res = min.split("px");
+                      res = parseInt(res[0]) + (80 * set);
+                      if(set == 0){
+                        feed.style.minHeight = res + 30 + "px";
+                      }else{
+                        feed.style.minHeight = res + "px";
+                      }                  
                     }                    
                   }
                 </script>
