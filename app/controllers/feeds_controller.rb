@@ -20,6 +20,8 @@ class FeedsController < ApplicationController
       @feeds = Feed.search(params[:search])
       @user = current_user
       @feed = Feed.new
+      @comment = Comment.new
+      @commentShow = Comment.all
     else
       @feeds = Feed.all
       @user = current_user

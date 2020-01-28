@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
     @comment.feed = Feed.find(comment_params[:feed_id])
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }
@@ -57,7 +57,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
