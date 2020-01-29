@@ -81,7 +81,7 @@
                     <%= link_to('Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }) %>
                   <% end %>
                   <%= link_to "Report", report_feed_path(feed.id), method: :put %>
-                  <a onclick='Comment(<%= @count %>,<%= @countImg %>, <%= @countImg %>)' class='comment'>Comment</a>
+                  <a onclick='Comment(<%= @count %>,<%= @countComments %>,<%= @countImg %>)' class='comment'>Comment</a>
                 </div>
 
                 <%= form_with(model: @comment, local: true) do |form| %>
@@ -126,12 +126,11 @@
                     if(comment.style.display == "block"){
                       comment.style.display = "none";
                       show.style.display = "none";
-                      text.innerHTML = "Comment";
-                      image.style.display = "block";
+                      text.innerHTML = "Comment";                     
                       feed.style.minHeight = "200px";
+                      image.style.display = "block";
                     }else{
                       comment.style.display = "block";
-                      image.style.display = "none";
                       feed.style.minHeight = "200px";
                       show.style.display = "block";
                       text.innerHTML = "Hide Comments";
@@ -143,13 +142,14 @@
                       }else{
                         feed.style.minHeight = res + "px";
                       }                  
+                      image.style.display = "none";
                     }                    
                   }
                 </script>
+                <% @count = @count + 1 %>
               <% end %>
             </div>
             <% end %>
-            <% @count = @count + 1 %>
           <% else %>
             <div class='container feed'>
               <div class='tweet-image'>

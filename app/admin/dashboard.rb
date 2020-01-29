@@ -27,8 +27,10 @@ ActiveAdmin.register_page "Dashboard" do
                     div class:'tweet-text' do
                       highlight(feed.text, /#\w+/, highlighter: '<a href="search?q=\1">\1</a>')
                     end
-                    if feed.image.attached?
-                      image_tag(feed.image, class:"feed-image")
+                    div do
+                      if feed.image.attached?
+                        image_tag(feed.image, class:"feed-image")
+                      end
                     end
                     div class:'buttons' do
                       link_to('Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' })
