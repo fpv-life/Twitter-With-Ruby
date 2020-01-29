@@ -51,9 +51,9 @@ class FeedsController < ApplicationController
   def create
     @feed = Feed.new(feed_params)
     @feed.user = current_user
-    #@feed.image.attach(params[:feed][:image])
+    @feed.save
     respond_to do |format|
-      if @feed.save
+      if @feed.save!
         format.html { redirect_to root_path, notice: 'Feed was successfully created.' }
         format.json { render :show, status: :created, location: @feed }
       else
