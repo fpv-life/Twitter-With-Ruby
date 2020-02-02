@@ -17,7 +17,6 @@ gem 'devise' #Adding device
 gem 'jquery-rails' #Addin JQuery
 gem 'omniauth-facebook' #Adding Facebook gem
 gem 'omniauth-google-oauth2' #Adding Google gem
-gem 'commontator' #Adding comments
 gem 'sassc-rails' #Same
 gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master' #Following
 gem 'acts_as_votable' #Voting on posts
