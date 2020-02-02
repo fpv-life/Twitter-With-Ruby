@@ -47,9 +47,9 @@
 
               <% if !current_user.nil? %>
                 <% if current_user.voted_up_for? feed %>
-                    <%= link_to "Downvote (" + feed.weighted_score.to_s + ")", dislike_feed_path(feed.id), method: :put, class: "links" %>
+                    <%= link_to "Downvote (" + feed.get_upvotes.size.to_s  + ")", dislike_feed_path(feed.id), method: :put, class: "links" %>
                   <% else %>
-                    <%= link_to "Upvote (" + feed.weighted_score.to_s + ")", like_feed_path(feed.id), method: :put, class: "links" %>
+                    <%= link_to "Upvote (" + feed.get_upvotes.size.to_s + ")", like_feed_path(feed.id), method: :put, class: "links" %>
                 <% end %>
 
                 <% @countComments = 0 %>
