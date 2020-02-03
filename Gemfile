@@ -21,6 +21,7 @@ gem 'sassc-rails' #Same
 gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master' #Following
 gem 'acts_as_votable' #Voting on posts
 gem 'activeadmin' #Admin page
+gem 'aws-sdk-s3' #Amazon web services
 #gem "activestorage"
 
 # Use Puma as the app server
