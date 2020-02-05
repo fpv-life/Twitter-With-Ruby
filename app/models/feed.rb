@@ -6,6 +6,6 @@ class Feed < ApplicationRecord
     has_one_attached :image
 
     def self.search(search)
-        where("text LIKE ?", "%##{search}%")
+        where("UPPER(text) LIKE ?", "UPPER(%##{search}%)")
     end
 end
