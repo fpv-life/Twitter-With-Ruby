@@ -2,12 +2,12 @@ class Api::V1::FeedsController < ActionController::API
   before_action :set_feed, only: [:destroy, :update]
 
   def index
-    feeds = Feed.all
-    feeds = feeds.map do |feed|
+    @feed = Feed.all
+    @feed = @feeds.map do |feed|
       { id: feed.id, text: feed.text, picture: feed.picture, time: feed.time, reported: feed.reported, user_id: feed.user_id }
     end
 
-    render json: { results: feeds }.to_json, status: :ok
+    render json: { results: @feeds }.to_json, status: :ok
   end
 
   def create
@@ -32,9 +32,9 @@ class Api::V1::FeedsController < ActionController::API
   def update
     if @feed
       @feed.update(feed_params)
-      render json: { result: @feeds }.to_json, status: :ok
+      render json: { result: @feed }.to_json, status: :ok
     else
-      render json: { result: @feeds.errors }.to_json, status: :unprocessable_entity
+      render json: { result: @feed.errors }.to_json, status: :unprocessable_entity
     end
   end
 
@@ -46,6 +46,6 @@ class Api::V1::FeedsController < ActionController::API
   end
 
   def feed_params
-    params.permit(:text, :time, :reported, :image)
+    params.require(:feed).permit(:text, :time, :reported, :image)
   end
 end
