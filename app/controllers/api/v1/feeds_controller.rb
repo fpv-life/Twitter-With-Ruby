@@ -1,5 +1,5 @@
 class Api::V1::FeedsController < ActionController::API
-  before_action :set_feed, only: [:index, :create, :update, :destroy]
+  before_action :set_feed, only: [:index, :create, :destroy, :update]
   skip_before_action :authenticate_request, only: [:index]
 
   def index
