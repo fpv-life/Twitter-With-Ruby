@@ -41,6 +41,10 @@ class Api::V1::FeedsController < ActionController::API
   private
 
   # Use callbacks to share common setup or constraints between actions.
+  def set_feed
+    @feed = Feed.find(params[:id])
+  end
+
   def feed_params
     params.permit(:text, :time, :reported, :image)
   end
