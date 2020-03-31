@@ -6,7 +6,7 @@ class FeedsController < ApplicationController
     @feed.liked_by current_user
     redirect_to root_path
   end
-  
+
   def downvote
     @feed = Feed.find(params[:id])
     @feed.downvote_from current_user
@@ -34,7 +34,6 @@ class FeedsController < ApplicationController
   # GET /feeds/1
   # GET /feeds/1.json
   def show
-    
   end
 
   # GET /feeds/new
@@ -54,7 +53,7 @@ class FeedsController < ApplicationController
     @feed.save
     respond_to do |format|
       if @feed.save!
-        format.html { redirect_to root_path, notice: 'Feed was successfully created.' }
+        format.html { redirect_to root_path, notice: "Feed was successfully created." }
         format.json { render :show, status: :created, location: @feed }
       else
         format.html { render :new }
@@ -68,7 +67,7 @@ class FeedsController < ApplicationController
   def update
     respond_to do |format|
       if @feed.update(feed_params)
-        format.html { redirect_to @feed, notice: 'Feed was successfully updated.' }
+        format.html { redirect_to @feed, notice: "Feed was successfully updated." }
         format.json { render :show, status: :ok, location: @feed }
       else
         format.html { render :edit }
@@ -83,7 +82,7 @@ class FeedsController < ApplicationController
     @feed.destroy
     @feed.image.purge
     respond_to do |format|
-      format.html { redirect_to feeds_url, notice: 'Feed was successfully destroyed.' }
+      format.html { redirect_to feeds_url, notice: "Feed was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -100,13 +99,14 @@ class FeedsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_feed
-      @feed = Feed.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def feed_params
-      params.require(:feed).permit(:text, :time, :reported, :image)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_feed
+    @feed = Feed.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def feed_params
+    params.require(:feed).permit(:text, :time, :reported, :image)
+  end
 end

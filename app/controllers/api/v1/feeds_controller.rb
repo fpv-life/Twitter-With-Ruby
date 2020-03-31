@@ -1,6 +1,5 @@
 class Api::V1::FeedsController < ActionController::API
-  before_action :set_feed, only: [:show, :edit, :update, :destroy, :report, :pardon]
-  skip_before_action :authenticate_request, only: [:index]
+  before_action :set_feed, only: [:index, :edit, :update, :destroy]
 
   def index
     feeds = Feed.all
@@ -43,11 +42,11 @@ class Api::V1::FeedsController < ActionController::API
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_building
+  def set_feed
     @feed = Feed.find(params[:id])
   end
 
-  def building_params
-    params.require(:feed).permit(:id, :text, :picture, :time, :reported, :user_id)
+  def feed_params
+    params.require(:feed).permit(:text, :time, :reported, :image)
   end
 end
