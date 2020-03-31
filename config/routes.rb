@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   resources :lists
   resources :feeds
-  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks', registrations: 'registrations'}
-  root to:'feeds#index'
-  match '/users',   to: 'users#index',   via: 'get'
+  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks", registrations: "registrations" }
+  root to: "feeds#index"
+  match "/users", to: "users#index", via: "get"
   resources :users, :only => [:index, :show] do
     resources :follows, :only => [:create, :destroy]
   end
@@ -18,5 +18,12 @@ Rails.application.routes.draw do
       put "pardon", to: "feeds#pardon"
     end
   end
-  get 'users/:id' => 'users#show'
+  get "users/:id" => "users#show"
+
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :feeds, only: [:index]
+      feed "authenticate", to: "authentication#authenticate"
+    end
+  end
 end

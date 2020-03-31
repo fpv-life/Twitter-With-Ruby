@@ -23,6 +23,9 @@ gem 'acts_as_votable' #Voting on posts
 gem 'activeadmin' #Admin page
 gem 'aws-sdk-s3' #Amazon web services
 #gem "activestorage"
+gem 'jwt'
+gem 'simple_command'
+
 
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
