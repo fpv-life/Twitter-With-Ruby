@@ -163,7 +163,7 @@
                 <%= feed.time %>
               </div>
               <div class='tweet-username'>
-                <%= feed.user.username %>
+                <%= feed.user.id %>
               </div>
               <div class='tweet-text'>                
                 <%= highlight(feed.text, /#\w+/, highlighter: '<a href="feeds?utf8=✓&search=\1&commit=Search">\1</a>') %>
