@@ -1,6 +1,6 @@
 <div class='row'>
     <div class='col-md-3'>
-      <%= render 'layouts/menu' %>  
+      <%= render "layouts/menu" %>  
     </div>
 
 
@@ -14,7 +14,7 @@
         </div>
 
         <div class='container no-padding'>
-          <%= render 'form', feed: @feed %>
+          <%= render "form", feed: @feed %>
         </div>
 
         <% @count = 0 %>
@@ -25,7 +25,7 @@
             <div class='container feed'>
               <div class='tweet-image'>
                 <% if feed.user.avatar.attached? %>
-                  <%= image_tag(feed.user.avatar, class: "feed-avatar")  %><br/>
+                  <%= image_tag(feed.user.avatar, class: "feed-avatar") %><br/>
                 <% else %>
                   <%= image_tag("/assets/avatar.png", class: "feed-avatar") %><br/>
                 <% end %>
@@ -41,13 +41,13 @@
               </div>
               
               <% if feed.image.attached? %>
-                <%= image_tag(feed.image, class:"feed-image") %>
+                <%= image_tag(feed.image, class: "feed-image") %>
                 <% @countImg = @countImg + 1 %>
               <% end %>
 
               <% if !current_user.nil? %>
                 <% if current_user.voted_up_for? feed %>
-                    <%= link_to "Unlike (" + feed.get_upvotes.size.to_s  + ")", dislike_feed_path(feed.id), method: :put, class: "links" %>
+                    <%= link_to "Unlike (" + feed.get_upvotes.size.to_s + ")", dislike_feed_path(feed.id), method: :put, class: "links" %>
                   <% else %>
                     <%= link_to "Like (" + feed.get_upvotes.size.to_s + ")", like_feed_path(feed.id), method: :put, class: "links" %>
                 <% end %>
@@ -60,7 +60,7 @@
                       <div class="container comments-feed">
                         <div class="avatar-username">
                           <% if comment.user.avatar.attached? %>
-                            <%= image_tag(comment.user.avatar, class: "comment-avatar")  %>
+                            <%= image_tag(comment.user.avatar, class: "comment-avatar") %>
                           <% else %>
                             <%= image_tag("/assets/avatar.png", class: "comment-avatar") %>
                           <% end %>
@@ -70,7 +70,7 @@
                           <%= comment.reply %>
                         </span>
                         <span class="comment-date"><%= comment.posted %></span>
-                        <span class="comment-delete buttons"><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+                        <span class="comment-delete buttons"><%= link_to "Destroy", comment, method: :delete, data: { confirm: "Are you sure?" } %></span>
                       </div>
                     <% end %>
                   <% end %>
@@ -78,7 +78,7 @@
 
                 <div class="buttons">
                   <% if current_user.email === feed.user.email %>              
-                    <%= link_to('Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' }) %>
+                    <%= link_to("Destroy", feed, method: :delete, data: { confirm: "Are you sure?" }) %>
                   <% end %>
                   <%= link_to "Report", report_feed_path(feed.id), method: :put %>
                   <a onclick='Comment(<%= @count %>,<%= @countComments %>,<%= @countImg %>)' class='comment'>Comment</a>
@@ -154,7 +154,7 @@
             <div class='container feed'>
               <div class='tweet-image'>
                 <% if feed.user.avatar.attached? %>
-                  <%= image_tag(feed.user.avatar, class: "feed-avatar")  %><br/>
+                  <%= image_tag(feed.user.avatar, class: "feed-avatar") %><br/>
                 <% else %>
                   <%= image_tag("/assets/avatar.png", class: "feed-avatar") %><br/>
                 <% end %>
@@ -170,7 +170,7 @@
               </div>
               
               <% if feed.image.attached? %>
-                <%= image_tag(feed.image, class:"feed-image") %>
+                <%= image_tag(feed.image, class: "feed-image") %>
               <% end %>
             </div>
           <% end %>
@@ -178,6 +178,6 @@
     </div>
     
     <div class='col-md-3 color margin'>
-      <%= render 'layouts/people' %>  
+      <%= render "layouts/people" %>  
     </div>
 </div>

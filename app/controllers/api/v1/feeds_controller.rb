@@ -3,7 +3,7 @@ class Api::V1::FeedsController < ActionController::API
 
   def index
     @feed = Feed.all
-    @feed = @feeds.map do |feed|
+    @feeds = @feed.map do |feed|
       { id: feed.id, text: feed.text, picture: feed.picture, time: feed.time, reported: feed.reported, user_id: feed.user_id }
     end
 
@@ -46,6 +46,6 @@ class Api::V1::FeedsController < ActionController::API
   end
 
   def feed_params
-    params.require(:feed).permit(:text, :time, :reported, :image)
+    params.permit(:text, :time, :reported, :image)
   end
 end
