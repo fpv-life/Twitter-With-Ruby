@@ -1,7 +1,4 @@
 class Api::V1::FeedsController < ActionController::API
-  before_action :set_feed, only: [:index, :edit, :update, :destroy]
-  set_before_action :authenticate_request, only: [:index]
-
   def index
     feeds = Feed.all
     feeds = feeds.map do |feed|
