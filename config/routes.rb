@@ -22,8 +22,8 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :feeds, only: [:index]
-      feed "authenticate", to: "authentication#authenticate"
+      resources :feeds, only: [:index, :create, :destroy, :update]
+      post "authenticate", to: "authentication#authenticate"
     end
   end
 end
