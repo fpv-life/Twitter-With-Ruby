@@ -24,7 +24,6 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :feeds, only: [:index, :create, :destroy, :update]
       post "authenticate", to: "authentication#authenticate"
-      get "feeds", to: "feeds#index"
     end
   end
 end
