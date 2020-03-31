@@ -1,5 +1,6 @@
-class Api::V1::FeedsController < ActionController::API
+class Api::V1::FeedsController < Api::ApplicationController
   before_action :set_feed, only: [:destroy, :update]
+  skip_before_action :authenticate_request, only: [:index]
 
   def index
     @feed = Feed.all
@@ -12,7 +13,7 @@ class Api::V1::FeedsController < ActionController::API
 
   def create
     @feed = Feed.new(feed_params)
-    @feed.user_id = @current_api_user
+    @feed.user_id = @current_api_user.id
     if @feed.save
       render json: { result: @feed }.to_json, status: :ok
     else
