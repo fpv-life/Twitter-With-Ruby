@@ -1,5 +1,5 @@
 class Api::V1::FeedsController < ActionController::API
-  before_action :set_feed, only: [:index, :create, :destroy, :update]
+  before_action :set_feed, only: [:create, :destroy, :update]
 
   def index
     feeds = Feed.all
